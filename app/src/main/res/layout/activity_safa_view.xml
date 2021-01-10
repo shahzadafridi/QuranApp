@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_clr"
+    android:scrollbars="none"
+    android:padding="@dimen/_8sdp"
+    tools:context=".ui.activity.SafaViewActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp">
+
+        <RelativeLayout
+            android:id="@+id/safa_view_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:src="@drawable/icon_left"
+                android:onClick="onBack"/>
+
+            <TextView
+                android:id="@+id/safa_view_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center_horizontal|center_vertical"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/safa_view_iv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_below="@id/safa_view_rl"
+            android:scaleType="fitXY"/>
+
+    </RelativeLayout>
+
+</ScrollView>

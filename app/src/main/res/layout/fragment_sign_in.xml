@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/_32sdp"
+    android:paddingRight="@dimen/_32sdp"
+    android:background="@color/background_clr"
+    tools:context=".ui.activity.AuthActivity">
+
+    <EditText
+        android:id="@+id/sing_in_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_round_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Enter email"
+        android:textColorHint="@color/unfocuss_text"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/sing_in_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@drawable/edit_text_round_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Enter password"
+        android:inputType="textPassword"
+        android:textSize="@dimen/_12ssp"
+        android:textColorHint="@color/unfocuss_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sing_in_email" />
+
+    <TextView
+        android:id="@+id/sing_in_forgot_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Forget password?"
+        android:textColor="@color/unfocuss_text"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sing_in_password" />
+
+    <Button
+        android:id="@+id/sing_in_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_32sdp"
+        android:background="@drawable/button_bg"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Sign in"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sing_in_forgot_pass" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center_horizontal"
+        android:text="Or Sign In With"
+        android:textColor="@color/unfocuss_text"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.807"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sing_in_btn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
