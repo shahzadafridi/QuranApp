@@ -15,25 +15,42 @@
         android:orientation="vertical"
         tools:context=".ui.activity.MainActivity">
 
-        <TextView
-            android:id="@+id/main_title"
+        <RelativeLayout
+            android:id="@+id/main_title_rl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_32sdp"
-            android:layout_marginTop="@dimen/_22sdp"
-            android:layout_marginRight="@dimen/_32sdp"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center_horizontal"
-            android:text=" سپاروں کے نام"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold" />
+            android:layout_marginTop="@dimen/_22sdp">
+
+            <ImageView
+                android:id="@+id/main_logout"
+                android:layout_width="@dimen/_26sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_marginRight="@dimen/_16sdp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_baseline_login_24"
+                android:onClick="onLogout"/>
+
+            <TextView
+                android:id="@+id/main_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/main_logout"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center_horizontal"
+                android:text=" سپاروں کے نام"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_para_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/main_title"
+            android:layout_below="@+id/main_title_rl"
             android:layout_marginTop="@dimen/_16sdp"
             android:nestedScrollingEnabled="false"/>
 

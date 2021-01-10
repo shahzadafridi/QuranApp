@@ -1,7 +1,10 @@
 package com.brikmas.quranapp.ui.activity
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -15,6 +18,7 @@ import com.brikmas.quranapp.util.Utility
 import com.brikmas.quranapp.viewModel.AuthViewModel
 import com.brikmas.quranapp.viewModel.MainViewModel
 import com.example.roadi.util.ActivityStack
+import com.google.firebase.auth.FirebaseAuth
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_sign_in.*
@@ -25,6 +29,7 @@ class MainActivity : AppCompatActivity(), ParaRecyclerAdapter.IParaSelector {
     val TAG = "MainActivity"
     var adapter: ParaRecyclerAdapter? = null
     var mainViewModel: MainViewModel? = null
+    var loadingProgressBar: KProgressHUD? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +51,28 @@ class MainActivity : AppCompatActivity(), ParaRecyclerAdapter.IParaSelector {
                 }
             }
         })
+
+        loadingProgressBar = KProgressHUD.create(this@MainActivity)
+            .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+            .setCancellable(true)
+            .setAnimationSpeed(2)
+            .setDimAmount(0.1f)
     }
-
-
 
     override fun onParaSelected(data: Para) {
         ActivityStack.startSafaActivity(this@MainActivity,data)
+    }
+
+    fun onLogout(view: View) {
+        loadingProgressBar!!.setDetailsLabel("logout...")
+        loadingProgressBar!!.show()
+        Handler(Looper.myLooper()!!).postDelayed({
+            FirebaseAuth.getInstance().signOut()
+            var session = mainViewModel!!.getSession(this@MainActivity)
+            session!!.isLogin = false
+            mainViewModel!!.updateSession(this@MainActivity, session)
+            loadingProgressBar!!.dismiss()
+            ActivityStack.startAuthActivity(this@MainActivity)
+        },3000)
     }
 }

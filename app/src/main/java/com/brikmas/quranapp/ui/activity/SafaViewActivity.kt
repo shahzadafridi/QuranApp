@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.github.chrisbanes.photoview.PhotoView
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.safa_item_layout.*
 
 
@@ -25,6 +26,7 @@ class SafaViewActivity : AppCompatActivity() {
     val TAG = "SafaViewActivity"
     var imageView: PhotoView? = null
     var title: TextView? = null
+    var loadingProgressBar: KProgressHUD? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,16 @@ class SafaViewActivity : AppCompatActivity() {
         var safa = intent.getParcelableExtra<Safa>("safa")
         Log.e(TAG,safa!!.image)
         title!!.text = safa.name
+
+        loadingProgressBar = KProgressHUD.create(this@SafaViewActivity)
+            .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+            .setCancellable(true)
+            .setAnimationSpeed(2)
+            .setDimAmount(0.1f)
+
+        loadingProgressBar!!.setDetailsLabel("loading image...")
+        loadingProgressBar!!.show()
+
         Glide.with(this)
             .asBitmap()
             .load(safa.image)
@@ -51,6 +63,7 @@ class SafaViewActivity : AppCompatActivity() {
                 override fun onLoadCleared(placeholder: Drawable?) {}
 
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap?>?) {
+                    loadingProgressBar!!.dismiss()
                     imageView!!.setImageBitmap(resource)
                 }
             })

@@ -25,8 +25,9 @@
             android:layout_marginTop="@dimen/_22sdp">
 
             <ImageView
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/icon_left"
                 android:onClick="onBack"/>
 

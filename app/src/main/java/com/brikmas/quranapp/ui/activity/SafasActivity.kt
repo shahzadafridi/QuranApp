@@ -16,6 +16,7 @@ import com.brikmas.quranapp.util.ResourceState
 import com.brikmas.quranapp.util.Utility
 import com.brikmas.quranapp.viewModel.MainViewModel
 import com.example.roadi.util.ActivityStack
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_safas.*
 import java.util.*
 import kotlin.Comparator
@@ -25,6 +26,7 @@ class SafasActivity : AppCompatActivity(), SafaRecyclerAdapter.ISafaSelector {
     val TAG = "MainActivity"
     var adapter: SafaRecyclerAdapter? = null
     var mainViewModel: MainViewModel? = null
+    var loadingProgressBar: KProgressHUD? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,15 @@ class SafasActivity : AppCompatActivity(), SafaRecyclerAdapter.ISafaSelector {
             }
         })
 
+        loadingProgressBar = KProgressHUD.create(this@SafasActivity)
+            .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+            .setCancellable(true)
+            .setAnimationSpeed(2)
+            .setDimAmount(0.1f)
+
+        loadingProgressBar!!.setDetailsLabel("loading data...")
+        loadingProgressBar!!.show()
+
     }
 
     fun sortList(data: MutableList<Safa>) {
@@ -66,6 +77,7 @@ class SafasActivity : AppCompatActivity(), SafaRecyclerAdapter.ISafaSelector {
             // Integer.valueOf(obj2.empId).compareTo(Integer.valueOf(obj1.empId)); // To compare integer values
         })
 
+        loadingProgressBar!!.dismiss()
         adapter!!.setList(data)
     }
 
