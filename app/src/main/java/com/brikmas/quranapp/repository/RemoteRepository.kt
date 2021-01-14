@@ -55,6 +55,7 @@ class RemoteRepository{
                     var childName = fileName.replace(".jpeg", "صفحہ")
                     var para = Safa(
                             fileName.replace(".jpeg", " صفحہ"),
+                            fileName.replace(".jpeg", " صفحہ"),
                             it.toString()
                     )
 
