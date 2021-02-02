@@ -28,17 +28,6 @@ class SplashActivity : AppCompatActivity(), Animation.AnimationListener {
 
         authViewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
 
-        var anim_left_to_right = AnimationUtils.loadAnimation(this,R.anim.left_to_right)
-        splash_logo.startAnimation(anim_left_to_right)
-        anim_left_to_right.setAnimationListener(this)
-
-    }
-
-    override fun onAnimationRepeat(animation: Animation?) {
-
-    }
-
-    override fun onAnimationEnd(animation: Animation?) {
         Handler(Looper.getMainLooper()).postDelayed({
             var session = authViewModel!!.getSession(SplashActivity@this)
             if (session != null){
@@ -51,6 +40,20 @@ class SplashActivity : AppCompatActivity(), Animation.AnimationListener {
                 ActivityStack.startAuthActivity(SplashActivity@this)
             }
         },2000)
+
+        //Animation Skiped for now.
+
+        var anim_left_to_right = AnimationUtils.loadAnimation(this,R.anim.left_to_right)
+        //splash_logo.startAnimation(anim_left_to_right)
+        anim_left_to_right.setAnimationListener(this)
+
+    }
+
+    override fun onAnimationRepeat(animation: Animation?) {
+
+    }
+
+    override fun onAnimationEnd(animation: Animation?) {
 
     }
 

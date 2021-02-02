@@ -3,9 +3,11 @@ package com.brikmas.quranapp.util
 object Constants {
 
 
+    val FIRESTORE_COLLECTION_VERSION: String = "version"
+
     /*
-    * MainActivity - Authentication Tabs
-    */
+        * MainActivity - Authentication Tabs
+        */
     var authTabTitles: List<String> = arrayListOf("Sign Up", "Sign In")
     val AUTH_GOOGLE = "google"; val AUTH_FACEBOOK = "facebook";  val AUTH_APP= "app";
 
@@ -14,6 +16,7 @@ object Constants {
     */
     val SHARED_PREF_FILE = "app"
     val SESSION_KEY = "user_session"
+    val VERSION_DIALOG_KEY = "version_dialog"
 
 
 

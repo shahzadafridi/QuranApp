@@ -20,7 +20,9 @@ import com.github.chrisbanes.photoview.PhotoView
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.safa_item_layout.*
 
-
+/*
+* Deprecated as the flow changes to ViewPager2
+*/
 class SafaViewActivity : AppCompatActivity() {
 
     val TAG = "SafaViewActivity"

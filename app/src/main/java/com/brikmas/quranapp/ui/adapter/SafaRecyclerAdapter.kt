@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -18,10 +19,13 @@ import com.brikmas.quranapp.model.Safa
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.RequestOptions.centerCropTransform
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.github.chrisbanes.photoview.PhotoView
 import com.google.gson.Gson
+import com.kaopiz.kprogresshud.KProgressHUD
 
 
 class SafaRecyclerAdapter(context: Context, safaSelector: ISafaSelector) : RecyclerView.Adapter<SafaRecyclerAdapter.ViewHolder>() {
@@ -37,13 +41,33 @@ class SafaRecyclerAdapter(context: Context, safaSelector: ISafaSelector) : Recyc
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): SafaRecyclerAdapter.ViewHolder {
-        val view: View = LayoutInflater.from(mContext).inflate(R.layout.safa_item_layout, null)
+        val view: View = LayoutInflater.from(mContext).inflate(R.layout.safa_item_layout, viewGroup, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(viewHolder: SafaRecyclerAdapter.ViewHolder, i: Int) {
-        var item = mList.get(i)
-        viewHolder.title.text = item.name
+        var safa = mList.get(i)
+        Glide.with(mContext)
+            .asBitmap()
+            .load(safa.image)
+            .apply(
+                RequestOptions.centerCropTransform()
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .placeholder(R.drawable.progress_animation)
+                    .error(R.drawable.quran_logo_150)
+                    .priority(Priority.HIGH)
+            )
+            .into(object : CustomTarget<Bitmap?>() {
+
+                override fun onLoadCleared(placeholder: Drawable?) {}
+
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap?>?) {
+                    viewHolder.img.setImageBitmap(resource)
+                    viewHolder.img.visibility = View.VISIBLE
+                    viewHolder.progressBar.visibility = View.INVISIBLE
+                }
+            })
+
     }
 
     override fun getItemCount(): Int {
@@ -57,13 +81,15 @@ class SafaRecyclerAdapter(context: Context, safaSelector: ISafaSelector) : Recyc
 
     inner class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        var img: ImageView
-        var title: TextView
+        var img: PhotoView
+        var placeHolder: ImageView
+        var progressBar: ProgressBar
         var isClick = false
 
         init {
-            title = itemView.findViewById(R.id.safa_item_title)
-            img = itemView.findViewById(R.id.safa_item_image)
+            img = itemView.findViewById(R.id.safa_item_view_iv)
+            placeHolder = itemView.findViewById(R.id.safa_item_view_iv2)
+            progressBar = itemView.findViewById(R.id.safa_item_view_prog)
             itemView.setOnClickListener(this)
         }
 

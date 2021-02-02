@@ -1,13 +1,23 @@
 package com.brikmas.quranapp.repository
 
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
+import android.widget.CheckBox
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.MutableLiveData
+import com.brikmas.quranapp.BuildConfig
 import com.brikmas.quranapp.R
 import com.brikmas.quranapp.model.Para
 import com.brikmas.quranapp.model.Safa
 import com.brikmas.quranapp.util.Constants
 import com.brikmas.quranapp.util.Resource
 import com.brikmas.quranapp.util.ResourceState
+import com.brikmas.quranapp.util.Utility
+import com.google.common.reflect.Reflection.getPackageName
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
@@ -150,6 +160,46 @@ class RemoteRepository{
             }
         }.addOnFailureListener {
             Log.e(TAG,it.message.toString())
+        }
+    }
+
+    fun checkAppVersion(context: Context) {
+        firestoreDB!!.
+                collection(Constants.FIRESTORE_COLLECTION_VERSION).
+                get().addOnCompleteListener {
+                    if (it.result!!.documents.size > 0){
+                        for (doc in it.result!!.documents){
+                            if (doc.exists()){
+                                val android_version = doc.getString("android_version")
+                                var description = doc.getString("description")
+                                description = description!!.replace("\\n", "\n\n")
+                                val versionName: String = BuildConfig.VERSION_NAME
+                                if (!android_version.equals(versionName)) {
+                                    var sharedPrefRepository: SharedPrefRepository = SharedPrefRepository.provideSharedRepository(context)
+                                    if (sharedPrefRepository.getVersionDialogShow()){
+                                        var dialog = Utility.onCreateDialog(context, R.layout.version_dialog, true)
+                                        dialog.findViewById<TextView>(R.id.version_dialog_version).text = "Latest Version: " + android_version
+                                        dialog.findViewById<TextView>(R.id.version_dialog_description).text = description
+                                        dialog.findViewById<CardView>(R.id.version_dialog_update).setOnClickListener {
+                                            val appPackageName = context.getPackageName()
+                                            try {
+                                                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                                            } catch (anfe: ActivityNotFoundException) {
+                                                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                                            }
+                                        }
+                                        dialog.findViewById<CheckBox>(R.id.version_dialog_chkbox).setOnCheckedChangeListener { buttonView, isChecked ->
+                                            if (isChecked){
+                                                var sharedPrefRepository: SharedPrefRepository = SharedPrefRepository.provideSharedRepository(context)
+                                                sharedPrefRepository.isVersionDialogShow(false)
+                                            }
+                                        }
+                                        dialog.show()
+                                    }
+                                }
+                            }
+                        }
+                    }
         }
     }
 }

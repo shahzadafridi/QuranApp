@@ -1,37 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tab_item_title_tv"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/safa_item_view_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:scaleType="fitXY"/>
+
+    <ProgressBar
+        android:id="@+id/safa_item_view_prog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_160sdp"
+        android:layout_centerHorizontal="true"/>
 
     <ImageView
-        android:id="@+id/safa_item_image"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_46sdp"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/quran_safa_con" />
-
-    <TextView
-        android:id="@+id/safa_item_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_14sdp"
-        android:layout_toLeftOf="@+id/safa_item_image"
-        android:fontFamily="@font/poppins_regular"
-        android:gravity="right"
-        android:paddingRight="@dimen/_16sdp"
-        android:text="10 صفحہ"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_16ssp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_below="@id/safa_item_image"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:background="#4D000000" />
+        android:id="@+id/safa_item_view_iv2"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_120sdp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/progress_animation"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

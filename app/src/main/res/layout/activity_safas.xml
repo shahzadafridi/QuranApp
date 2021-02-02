@@ -22,6 +22,7 @@
             android:id="@+id/safa_rl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:layout_marginTop="@dimen/_22sdp">
 
             <ImageView
@@ -36,7 +37,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_32sdp"
-                android:layout_marginRight="@dimen/_32sdp"
+                android:paddingRight="@dimen/_16sdp"
+                android:layout_toLeftOf="@+id/safa_icon_image"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center_horizontal"
                 android:text=" سپاروں کے نام"
@@ -44,15 +46,30 @@
                 android:textSize="@dimen/_18ssp"
                 android:textStyle="bold" />
 
+            <ImageView
+                android:id="@+id/safa_icon_image"
+                android:layout_width="@dimen/_26sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_marginRight="@dimen/_32sdp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/quran_safa_con" />
+
         </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/safa_para_rv"
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/safa_para_rv"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/safa_rl"-->
+<!--            android:layout_marginTop="@dimen/_16sdp"-->
+<!--            android:nestedScrollingEnabled="false"/>-->
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/safa_para_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/safa_rl"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:nestedScrollingEnabled="false"/>
+            android:layout_marginTop="@dimen/_16sdp"/>
 
         <TextView
             android:layout_width="match_parent"

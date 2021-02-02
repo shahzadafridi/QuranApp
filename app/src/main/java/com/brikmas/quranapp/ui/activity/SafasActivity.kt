@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.brikmas.quranapp.R
 import com.brikmas.quranapp.model.Para
 import com.brikmas.quranapp.model.Safa
@@ -27,16 +28,25 @@ class SafasActivity : AppCompatActivity(), SafaRecyclerAdapter.ISafaSelector {
     var adapter: SafaRecyclerAdapter? = null
     var mainViewModel: MainViewModel? = null
     var loadingProgressBar: KProgressHUD? = null
+    var viewPager2: ViewPager2? = null
+    var list: List<Safa> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_safas)
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        safa_para_rv.layoutManager = LinearLayoutManager(this)
+        viewPager2 = findViewById(R.id.safa_para_viewpager) as ViewPager2
+        viewPager2!!.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         adapter = SafaRecyclerAdapter(this, this)
-        safa_para_rv.adapter = adapter
+        viewPager2!!.adapter = adapter
+        viewPager2!!.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                safa_title.text = list.get(position).name
+            }
+        })
+
         var para = intent.getParcelableExtra<Para>("para")
-        safa_title.text = para!!.id+" کے صفحات"
         mainViewModel!!.getSafas(para!!.id)
 
         mainViewModel!!.safaLiveData.observe(this, Observer {
@@ -76,13 +86,14 @@ class SafasActivity : AppCompatActivity(), SafaRecyclerAdapter.ISafaSelector {
             // obj2.firstName.compareToIgnoreCase(obj1.firstName); // To compare string values
             // Integer.valueOf(obj2.empId).compareTo(Integer.valueOf(obj1.empId)); // To compare integer values
         })
-
+        list = data
         loadingProgressBar!!.dismiss()
         adapter!!.setList(data)
     }
 
     override fun onSafaSelected(data: Safa) {
-        ActivityStack.startSafaViewActivity(this@SafasActivity,data)
+        Utility.printDebugLog(TAG, data.name + " selected.")
+//        ActivityStack.startSafaViewActivity(this@SafasActivity,data)
     }
 
     fun onBack(view: View) {

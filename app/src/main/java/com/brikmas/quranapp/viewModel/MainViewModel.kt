@@ -32,4 +32,8 @@ class MainViewModel: ViewModel(){
         var sharedPrefRepository: SharedPrefRepository = SharedPrefRepository.provideSharedRepository(context)
         sharedPrefRepository.updateSession(session)
     }
+
+    fun checkVersion(context: Context) {
+        remoteRepository.checkAppVersion(context)
+    }
 }

@@ -54,18 +54,15 @@ object Utility {
         return android_id
     }
 
-    fun onCreateDialog(context: Context, layout: Int, cancelable: Boolean): Dialog? {
+    fun onCreateDialog(context: Context, layout: Int, cancelable: Boolean): Dialog {
         val metrics = context.resources.displayMetrics
         val width = metrics.widthPixels
         val height = metrics.heightPixels
-        val dialog = Dialog(context, R.style.Theme_Dialog)
+        val dialog = Dialog(context, android.R.style.Theme_Dialog)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(layout)
         dialog.window!!.setGravity(Gravity.CENTER)
-        dialog.window!!.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
+        dialog.window!!.setLayout(6 * width / 7, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCancelable(cancelable)
         return dialog

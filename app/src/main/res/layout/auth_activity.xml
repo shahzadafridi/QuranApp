@@ -7,7 +7,22 @@
     android:layout_height="match_parent"
     android:background="@color/background_clr"
     android:visibility="visible"
-    tools:context=".ui.fragment.SignInFragment">
+    tools:context=".ui.activity.AuthActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginRight="@dimen/_16sdp"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center_horizontal"
+        android:onClick="onSkip"
+        android:text="Skip"
+        android:textColor="@color/primary_blue"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView

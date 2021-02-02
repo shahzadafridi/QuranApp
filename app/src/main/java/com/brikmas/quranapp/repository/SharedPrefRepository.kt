@@ -31,11 +31,6 @@ class SharedPrefRepository(context: Context) {
         sharedPreferences.edit().
         putString(Constants.SESSION_KEY, str_session).
         apply()
-
-        sharedPreferences.edit {
-            putString(Constants.SESSION_KEY,str_session)
-        }
-
     }
 
     fun getSession(): Session? {
@@ -45,5 +40,16 @@ class SharedPrefRepository(context: Context) {
             return session
         }
         return null
+    }
+
+    fun isVersionDialogShow(isShow: Boolean){
+        sharedPreferences.edit().
+        putBoolean(Constants.VERSION_DIALOG_KEY, isShow).
+        apply()
+    }
+
+    fun getVersionDialogShow(): Boolean {
+        var versionDialogShow = sharedPreferences.getBoolean(Constants.VERSION_DIALOG_KEY,true)
+        return versionDialogShow
     }
 }
