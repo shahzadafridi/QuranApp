@@ -74,7 +74,7 @@ class AuthActivity : AppCompatActivity() , TabLayout.OnTabSelectedListener {
 
     fun onSkip(view: View){
         authViewModel!!.updateSession(this,"")
-        ActivityStack.startAuthActivity(this@AuthActivity)
+        ActivityStack.startMainActivity(this@AuthActivity)
     }
 
     fun clearLightStatusBar(color: Int) {
