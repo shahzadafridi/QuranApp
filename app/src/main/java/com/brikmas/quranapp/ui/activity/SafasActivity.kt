@@ -1,11 +1,13 @@
 package com.brikmas.quranapp.ui.activity
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,6 +41,9 @@ class SafasActivity : AppCompatActivity(), SafaRecyclerAdapter.ISafaSelector {
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewPager2 = findViewById(R.id.safa_para_viewpager) as ViewPager2
         viewPager2!!.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            viewPager2!!.layoutDirection = ViewCompat.LAYOUT_DIRECTION_RTL
+        }
         adapter = SafaRecyclerAdapter(this, this)
         viewPager2!!.adapter = adapter
         viewPager2!!.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
