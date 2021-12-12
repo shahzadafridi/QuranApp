@@ -9,6 +9,7 @@ import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity(), ParaRecyclerAdapter.IParaSelector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         main_para_rv.layoutManager = GridLayoutManager(this,2)
         adapter = ParaRecyclerAdapter(this,this)

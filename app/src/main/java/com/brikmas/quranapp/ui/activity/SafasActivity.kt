@@ -3,6 +3,7 @@ package com.brikmas.quranapp.ui.activity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -34,6 +35,7 @@ class SafasActivity : AppCompatActivity(), SafaRecyclerAdapter.ISafaSelector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_safas)
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewPager2 = findViewById(R.id.safa_para_viewpager) as ViewPager2
         viewPager2!!.orientation = ViewPager2.ORIENTATION_HORIZONTAL
